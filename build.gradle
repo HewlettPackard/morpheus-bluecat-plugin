@@ -65,6 +65,12 @@ dependencies {
 	testImplementation platform("org.spockframework:spock-bom:$spockVersion")
 	testImplementation "org.spockframework:spock-core"
 	testImplementation 'cglib:cglib-nodep:3.2.12'
+
+	constraints {
+		testImplementation('org.bouncycastle:bcprov-jdk18on:1.85') {
+			because('fixes CVE-2025-14813, CVE-2026-8763, CVE-2026-13506, CVE-2026-0636 in the transitive test dependency')
+		}
+	}
 }
 
 
