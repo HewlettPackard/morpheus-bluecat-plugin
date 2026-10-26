@@ -67,6 +67,15 @@ dependencies {
 	testImplementation 'cglib:cglib-nodep:3.2.12'
 
 	constraints {
+		testImplementation('com.fasterxml.jackson.core:jackson-core:2.21.7') {
+			because('fixes jackson-core CVEs in the transitive test dependency')
+		}
+		testImplementation('com.fasterxml.jackson.core:jackson-databind:2.21.7') {
+			because('fixes jackson-databind CVEs in the transitive test dependency')
+		}
+		testImplementation('com.fasterxml.jackson.core:jackson-annotations:2.21') {
+			because('keeps annotations aligned with jackson-databind 2.21')
+		}
 		testImplementation('org.bouncycastle:bcprov-jdk18on:1.85') {
 			because('fixes CVE-2025-14813, CVE-2026-8763, CVE-2026-13506, CVE-2026-0636 in the transitive test dependency')
 		}
