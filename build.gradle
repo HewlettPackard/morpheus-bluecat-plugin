@@ -46,10 +46,10 @@ configurations {
 dependencies {
 	provided "com.morpheusdata:morpheus-plugin-api:$morpheusApiVersion"
 	provided "org.apache.groovy:groovy-all:$groovyVersion"
-	implementation 'commons-beanutils:commons-beanutils:1.9.3'
+	implementation 'commons-beanutils:commons-beanutils:1.11.0'
 	implementation "org.slf4j:slf4j-api:$slf4jVersion"
 	implementation "org.slf4j:slf4j-parent:$slf4jVersion"
-	implementation 'commons-net:commons-net:3.6'
+	implementation 'commons-net:commons-net:3.9.0'
 	implementation 'commons-validator:commons-validator:1.7'
 
 	// Include morpheus-core and it's dependencies
@@ -65,6 +65,24 @@ dependencies {
 	testImplementation platform("org.spockframework:spock-bom:$spockVersion")
 	testImplementation "org.spockframework:spock-core"
 	testImplementation 'cglib:cglib-nodep:3.2.12'
+
+	constraints {
+		testImplementation('com.fasterxml.jackson.core:jackson-core:2.21.7') {
+			because('fixes jackson-core CVEs in the transitive test dependency')
+		}
+		testImplementation('com.fasterxml.jackson.core:jackson-databind:2.21.7') {
+			because('fixes jackson-databind CVEs in the transitive test dependency')
+		}
+		testImplementation('com.fasterxml.jackson.core:jackson-annotations:2.21') {
+			because('keeps annotations aligned with jackson-databind 2.21')
+		}
+		testImplementation('com.github.jknack:handlebars:4.5.2') {
+			because('fixes CVE-2026-55760 in the transitive test dependency')
+		}
+		testImplementation('org.bouncycastle:bcprov-jdk18on:1.85') {
+			because('fixes CVE-2025-14813, CVE-2026-8763, CVE-2026-13506, CVE-2026-0636 in the transitive test dependency')
+		}
+	}
 }
 
 
